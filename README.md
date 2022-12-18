@@ -1,4 +1,4 @@
-#Stock Trading Data
+# Stock Trading Data
 
 This is my first python app & it is a web scraping applicatoin collecting useful data on stocks from the Yahoo Finance domain. 
 I find value in metrics such as: 
