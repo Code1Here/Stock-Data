@@ -6,7 +6,7 @@ What this application acheives thus far **12/18/2022** is to:
 2. Print the earnings date, which traders use to bet on a security's price direction
 
 
-*I find value in metrics such as: *
+*I find value in metrics such as:*
 + Forward P/E
 + Price-to-Sales
 + PEG Ratio
