@@ -16,8 +16,10 @@ u = 'https://finance.yahoo.com/quote/U'
 sq = 'https://finance.yahoo.com/quote/SQ'
 coin = 'https://finance.yahoo.com/quote/COIN'
 
-watchList = [tsla, fubo, docu, rblx, abnb, goog, aapl, pypl, nvda, snow, shop, u, sq, coin]
-
+watchList = [aapl, goog, tsla, nvda, pypl, abnb, snow, shop, sq, rblx, u, docu, coin, fubo]
+testArray = {}
+consoleDecor = '****************************************************'
+print('\n')
 
 for url in watchList:
     r = requests.get(url)
@@ -25,14 +27,15 @@ for url in watchList:
 
     ##
     # Title & validation
+    title = soup.find('h1', {'class':'D(ib) Fz(18px)'}).text
+    print(consoleDecor, '\n'+title)
     earningsDate = soup.find('td', {'data-test':'EARNINGS_DATE-value'}).text
-    print(soup.title.text)
     print("Earnings Date:", earningsDate)
 
     ##
     # End of day closing price
     closingPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
-    print("Closing Price: ", closingPrice)
+    print("Closing Price: $", closingPrice)
 
     ##
     # % change off avg vol; in-either direction
@@ -45,7 +48,24 @@ for url in watchList:
     avgVol = int(averageVolume.replace(",",""))
     # round and print
     percentageOffAvgVol = round((((vol - avgVol)/avgVol)*100), 2);
-    print("Percentage off Avg-vol:", percentageOffAvgVol,"%\n\n")
+    print("Deviation from Avg-vol:", percentageOffAvgVol,"%\n\n")
 
     ####
-    # Find marketcap to print to me a reorganized array of importance
+    ## Find marketcap to print to me a reorganized array of value
+
+    # marketCap = soup.find('td', {'data-test':'MARKET_CAP-value'}).text
+    # if(marketCap[-1] == 'T'):
+    #     marketCap = float(marketCap[:-1]) * 1_000_000_000_000
+    # elif(marketCap[-1] == 'B'):
+    #     marketCap = float(marketCap[:-1]) * 1_000_000_000
+    # elif(marketCap[-1] == 'M'):
+    #     marketCap = float(marketCap[:-1]) * 1_000_000
+
+    # testArray[marketCap] = title
+
+#### Use only to sort hard coded values/URLS/Stock picks
+
+# testFinal = sorted(testArray)
+# for stock in testFinal:
+#     print(testArray[stock])
+    
