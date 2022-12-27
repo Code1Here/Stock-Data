@@ -25,20 +25,21 @@ for url in watchList:
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
 
-    ##
-    # Title & validation
+    ### Title & validation
     title = soup.find('h1', {'class':'D(ib) Fz(18px)'}).text
     print(consoleDecor, '\n'+title)
     earningsDate = soup.find('td', {'data-test':'EARNINGS_DATE-value'}).text
     print("Earnings Date:", earningsDate)
 
-    ##
-    # End of day closing price
+    ### End of day closing price
     closingPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
     print("Closing Price: $", closingPrice)
 
-    ##
-    # % change off avg vol; in-either direction
+    ### P/E Ratio
+    currentPE = soup.find('td', {'data-test':'PE_RATIO-value'}).text
+    print("Current P/E (TTM): ", currentPE)
+
+    ### % change off avg vol; in-either direction
 
     # convert str of today's volume to int
     volume = soup.find('td', {'data-test':'TD_VOLUME-value'}).text
@@ -49,6 +50,10 @@ for url in watchList:
     # round and print
     percentageOffAvgVol = round((((vol - avgVol)/avgVol)*100), 2);
     print("Deviation from Avg-vol:", percentageOffAvgVol,"%\n\n")
+
+
+
+
 
     ####
     ## Find marketcap to print to me a reorganized array of value
