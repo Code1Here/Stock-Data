@@ -39,6 +39,14 @@ for url in watchList:
     currentPE = soup.find('td', {'data-test':'PE_RATIO-value'}).text
     print("Current P/E (TTM): ", currentPE)
 
+    ### 52WK High & 52WK Low
+    priceRange = soup.find('td', {'data-test':'FIFTY_TWO_WK_RANGE-value'}).text
+    newStr = priceRange.split(' ')
+    yearHighs = newStr[-1]
+    print('52 Week High: $', yearHighs)
+    yearLows  = newStr[0]
+    print('52 Week Low: $', yearLows)
+
     ### % change off avg vol; in-either direction
 
     # convert str of today's volume to int
