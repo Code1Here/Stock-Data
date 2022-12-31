@@ -17,7 +17,6 @@ sq = 'https://finance.yahoo.com/quote/SQ'
 coin = 'https://finance.yahoo.com/quote/COIN'
 
 watchList = [aapl, goog, tsla, nvda, pypl, abnb, snow, shop, sq, rblx, u, docu, coin, fubo]
-testArray = {}
 consoleDecor = '****************************************************'
 print('\n')
 
@@ -25,11 +24,19 @@ for url in watchList:
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
 
-    ### Title & validation
+    ### Title
     title = soup.find('h1', {'class':'D(ib) Fz(18px)'}).text
     print(consoleDecor, '\n'+title)
-    earningsDate = soup.find('td', {'data-test':'EARNINGS_DATE-value'}).text
-    print("Earnings Date:", earningsDate)
+
+
+    ### 52WK High & 52WK Low
+    priceRange = soup.find('td', {'data-test':'FIFTY_TWO_WK_RANGE-value'}).text
+    newStr = priceRange.split(' ')
+    yearHighs = newStr[-1]
+    print('52 Week High: $', yearHighs)
+    yearLows  = newStr[0]
+    print('52 Week Low: $', yearLows)
+
 
     ### Current price & percentage gain
     currentPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
@@ -42,31 +49,29 @@ for url in watchList:
     currentPE = soup.find('td', {'data-test':'PE_RATIO-value'}).text
     print("Current P/E (TTM): ", currentPE)
 
-    ### 52WK High & 52WK Low
-    priceRange = soup.find('td', {'data-test':'FIFTY_TWO_WK_RANGE-value'}).text
-    newStr = priceRange.split(' ')
-    yearHighs = newStr[-1]
-    print('52 Week High: $', yearHighs)
-    yearLows  = newStr[0]
-    print('52 Week Low: $', yearLows)
 
-    ### % change off avg vol; in-either direction
-
+    ### Volume Metrics
     # convert str of today's volume to int
     volume = soup.find('td', {'data-test':'TD_VOLUME-value'}).text
     vol = int(volume.replace(",",""))
-    # average volume next
+    # average volume to int
     averageVolume = soup.find('td', {'data-test': 'AVERAGE_VOLUME_3MONTH-value'}).text
     avgVol = int(averageVolume.replace(",",""))
-    # round and print
+    # % change off avg vol; in-either direction
     percentageOffAvgVol = round((((vol - avgVol)/avgVol)*100), 2);
     print("Volume: ",vol)
     print("Average Volume: ",avgVol)
     print("Deviation from Avg-vol:", percentageOffAvgVol,"%\n\n")
 
 
+    ### Earnings Date
+    earningsDate = soup.find('td', {'data-test':'EARNINGS_DATE-value'}).text
+    print("Earnings Date:", earningsDate)
 
 
+
+#### Use only to sort hard coded values/URLS/Stock picks & add to the loop above
+# testArray = {}
 
     ####
     ## Find marketcap to print to me a reorganized array of value
@@ -80,8 +85,6 @@ for url in watchList:
     #     marketCap = float(marketCap[:-1]) * 1_000_000
 
     # testArray[marketCap] = title
-
-#### Use only to sort hard coded values/URLS/Stock picks
 
 # testFinal = sorted(testArray)
 # for stock in testFinal:
