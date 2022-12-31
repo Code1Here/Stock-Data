@@ -57,6 +57,8 @@ for url in watchList:
     avgVol = int(averageVolume.replace(",",""))
     # round and print
     percentageOffAvgVol = round((((vol - avgVol)/avgVol)*100), 2);
+    print("Volume: ",vol)
+    print("Average Volume: ",avgVol)
     print("Deviation from Avg-vol:", percentageOffAvgVol,"%\n\n")
 
 
