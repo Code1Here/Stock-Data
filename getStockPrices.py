@@ -31,9 +31,12 @@ for url in watchList:
     earningsDate = soup.find('td', {'data-test':'EARNINGS_DATE-value'}).text
     print("Earnings Date:", earningsDate)
 
-    ### End of day closing price
-    closingPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
-    print("Closing Price: $", closingPrice)
+    ### Current price & percentage gain
+    currentPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
+    percentageGain = soup.find('fin-streamer', {"data-test":"qsp-price-change"}).text
+    print("Current Price: $", currentPrice)
+    print("Percentage Gain: ", percentageGain)
+    
 
     ### P/E Ratio
     currentPE = soup.find('td', {'data-test':'PE_RATIO-value'}).text
