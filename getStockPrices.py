@@ -42,7 +42,7 @@ for url in watchList:
     currentPrice = soup.find('fin-streamer', {'data-test':"qsp-price" }).text
     percentageGain = soup.find('fin-streamer', {"data-test":"qsp-price-change"}).text
     print("Current Price: $", currentPrice)
-    print("Percentage Gain: ", percentageGain)
+    print("Percentage Gain: ", percentageGain, "%")
     
 
     ### P/E Ratio
