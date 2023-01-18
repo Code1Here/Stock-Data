@@ -25,3 +25,4 @@ What this application acheives thus far **12/18/2022** is to:
 + Current Ratio
 + Operating Cash Flow
 
+![Screenshot (572)](https://user-images.githubusercontent.com/87147191/213084097-62ac952e-1890-4709-820b-cb5202a3ab98.png)
