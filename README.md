@@ -1,9 +1,6 @@
 # Stock Trading Data
 
-This is a console python application using web scraping functionality for collecting useful data on stocks from the Yahoo Finance domain. 
-What this application acheives thus far is to:
-1. Calculate the volume percentage change above or below the average volume on any given day
-2. Print the earnings date, which traders use to bet on a security's price direction
+This console python application points to the Yahoo Finance domain, collects data & curates useful data on select stocks using web scraping functionality. For example, data such as the percentage change of volume above or below the avgerage volume, dollar & percentage amount an equity's price is above its year low, etc. Future plans are to store data into PostgreSQL, render with React & automate daily pulls for data with cronjob.
 
 
 *I find value in metrics such as:*
